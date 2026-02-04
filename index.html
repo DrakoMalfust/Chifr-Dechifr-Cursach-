@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шифровальщик Цезаря</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Шифровальщик Цезаря</h1>
+        <div class="form-group">
+            <label for="text">Введите текст:</label>
+            <textarea id="text" rows="4" placeholder="Введите текст для шифрования..."></textarea>
+        </div>
+        <div class="form-group">
+            <label for="shift">Сдвиг (число от 1 до 33):</label>
+            <input type="number" id="shift" min="1" max="33" value="3">
+        </div>
+        <button onclick="encryptText()">Зашифровать</button>
+        <button onclick="decryptText()">Расшифровать</button>
+        <div class="form-group">
+            <label for="result">Результат:</label>
+            <textarea id="result" rows="4" readonly></textarea>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
