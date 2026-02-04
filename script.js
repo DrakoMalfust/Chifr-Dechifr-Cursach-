@@ -4,7 +4,8 @@ let history = [];
 // Функция шифрования/дешифрования (с поддержкой кириллицы)
 function caesarCipher(text, shift, decrypt = false) {
     let result = '';
-    const shiftValue = decrypt ? 33 - shift : shift;
+    const shiftValueEng = decrypt ? 26 - shift : shift;
+    const shiftValueRu = decrypt ? 33 - shift : shift;
 
 
     for (let i = 0; i < text.length; i++) {
@@ -12,25 +13,25 @@ function caesarCipher(text, shift, decrypt = false) {
 
         // Латинские заглавные (A-Z)
         if (charCode >= 65 && charCode <= 90) {
-            result += String.fromCharCode(((charCode - 65 + shiftValue) % 26) + 65);
+            result += String.fromCharCode(((charCode - 65 + shiftValueEng) % 26) + 65);
         }
         // Латинские строчные (a-z)
         else if (charCode >= 97 && charCode <= 122) {
-            result += String.fromCharCode(((charCode - 97 + shiftValue) % 26) + 97);
+            result += String.fromCharCode(((charCode - 97 + shiftValueEng) % 26) + 97);
         }
         // Кириллица заглавная (А-Я, Ё)
         else if (charCode === 1025) { // Ё
-            result += String.fromCharCode(((1025 - 1040 + shiftValue) % 33) + 1040);
+            result += String.fromCharCode(((1025 - 1040 + shiftValueRu) % 33) + 1040);
         }
         else if (charCode >= 1040 && charCode <= 1071) { // А-Я
-            result += String.fromCharCode(((charCode - 1040 + shiftValue) % 33) + 1040);
+            result += String.fromCharCode(((charCode - 1040 + shiftValueRu) % 33) + 1040);
         }
         // Кириллица строчная (а-я, ё)
         else if (charCode === 1105) { // ё
-            result += String.fromCharCode(((1105 - 1072 + shiftValue) % 33) + 1072);
+            result += String.fromCharCode(((1105 - 1072 + shiftValueRu) % 33) + 1072);
         }
         else if (charCode >= 1072 && charCode <= 1103) { // а-я
-            result += String.fromCharCode(((charCode - 1072 + shiftValue) % 33) + 1072);
+            result += String.fromCharCode(((charCode - 1072 + shiftValueRu) % 33) + 1072);
         }
         // Всё остальное (цифры, знаки, пробелы) — без изменений
         else {
@@ -84,8 +85,8 @@ function validateShift() {
     const error = document.getElementById('shift-error');
     const value = parseInt(input.value, 10);
 
-    if (isNaN(value) || value < 1 || value > 25) {
-        error.textContent = 'Значение должно быть от 1 до 25.';
+    if (isNaN(value) || value < 1 || value > 33) {
+        error.textContent = 'Значение должно быть от 1 до 33.';
         error.style.display = 'block';
         input.style.borderColor = '#ff3333';
         return false;
@@ -121,6 +122,7 @@ function decryptText() {
 }
 
 // Инициализация (проверка при загрузке)
-window.onload = function () {
-    validateShift();
-};
+// window.onload = function () {
+//     validateShift();
+// };
+
